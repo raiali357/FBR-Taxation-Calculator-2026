@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pakistan Withholding Tax Calculator TY 2026</title>
+    <meta name="description" content="All-in-one FBR Tax Year 2026 calculator for salary, property and withholding tax estimates.">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero hero-simple" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Pakistan Tax Year 2026</p>
+          <h1 id="page-title">Tax Calculator FY 2026</h1>
+          <p>Salary, property, capital gain, withholding tax and other related calculators arranged in focused tabs.</p>
+        </div>
+      </section>
+
+      <nav class="tab-bar" aria-label="Calculator tabs">
+        <button class="tab-button active" type="button" data-tab-target="salaryTab">1. Salary</button>
+        <button class="tab-button" type="button" data-tab-target="propertyTab">2. Property</button>
+        <button class="tab-button" type="button" data-tab-target="withholdingTab">3. Withholding Tax Calculator</button>
+        <button class="tab-button" type="button" data-tab-target="referenceTab">4. Reference & More</button>
+      </nav>
+
+      <section class="tab-panel active" id="salaryTab">
+        <section class="panel slab-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Section 149</p>
+              <h2>Salary tax calculator</h2>
+            </div>
+          </header>
+          <div class="form-grid three">
+            <label>
+              <span>Salary amount</span>
+              <input class="money-input" id="salaryIncome" type="text" inputmode="numeric" placeholder="e.g. 3,600,000">
+            </label>
+            <label>
+              <span>Salary basis</span>
+              <select id="salaryBasis">
+                <option value="annual">Annual salary</option>
+                <option value="monthly">Monthly salary</option>
+              </select>
+            </label>
+            <label>
+              <span>Include surcharge above Rs. 10m</span>
+              <select id="salarySurcharge">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </label>
+          </div>
+          <div class="result-grid">
+            <div><span>Annual taxable salary</span><strong id="salaryAnnual">Rs. 0</strong></div>
+            <div><span>Annual tax</span><strong id="salaryTax">Rs. 0</strong></div>
+            <div><span>Surcharge</span><strong id="salarySurchargeOut">Rs. 0</strong></div>
+            <div><span>Monthly WHT to deduct</span><strong id="salaryMonthly">Rs. 0</strong></div>
+          </div>
+          <div class="explain-box" id="salaryExplain">Enter monthly or annual taxable salary. Monthly withholding will be calculated automatically.</div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="propertyTab">
+        <section class="panel slab-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Sections 236C and 236K</p>
+              <h2>Immovable property calculator</h2>
+            </div>
+          </header>
+
+          <div class="sub-tab-bar" aria-label="Property calculator tabs">
+            <button class="sub-tab-button active" type="button" data-subtab-target="sellerPanel">Seller 236C</button>
+            <button class="sub-tab-button" type="button" data-subtab-target="buyerPanel">Purchaser 236K</button>
+            <button class="sub-tab-button" type="button" data-subtab-target="capitalGainPanel">Seller Capital Gain</button>
+          </div>
+
+          <div class="sub-tab-panel active" id="sellerPanel">
+            <div class="form-grid three">
+              <label><span>Gross consideration / FMV</span><input class="money-input" id="sellerPropertyValue" type="text" inputmode="numeric" placeholder="e.g. 75,000,000"></label>
+              <label><span>Seller status</span><select id="sellerStatus"><option value="active">Active ATL</option><option value="late">Late filer</option><option value="inactive">Not in ATL</option></select></label>
+              <label><span>Section</span><input value="236C - Sale or transfer" disabled></label>
+            </div>
+            <div class="result-grid">
+              <div><span>Seller rate</span><strong id="sellerRate">0%</strong></div>
+              <div><span>Seller tax</span><strong id="sellerTax">Rs. 0</strong></div>
+              <div><span>Net after tax</span><strong id="sellerNet">Rs. 0</strong></div>
+            </div>
+          </div>
+
+          <div class="sub-tab-panel" id="buyerPanel">
+            <div class="form-grid three">
+              <label><span>Fair market value</span><input class="money-input" id="buyerPropertyValue" type="text" inputmode="numeric" placeholder="e.g. 75,000,000"></label>
+              <label><span>Purchaser status</span><select id="buyerStatus"><option value="active">Active ATL</option><option value="late">Late filer</option><option value="inactive">Not in ATL</option></select></label>
+              <label><span>Section</span><input value="236K - Purchase or transfer" disabled></label>
+            </div>
+            <div class="result-grid">
+              <div><span>Purchaser rate</span><strong id="buyerRate">0%</strong></div>
+              <div><span>Purchaser tax</span><strong id="buyerTax">Rs. 0</strong></div>
+              <div><span>Total cash outflow</span><strong id="buyerGross">Rs. 0</strong></div>
+            </div>
+          </div>
+
+          <div class="sub-tab-panel" id="capitalGainPanel">
+            <div class="form-grid three">
+              <label><span>Sale consideration / FMV</span><input class="money-input" id="cgtSaleValue" type="text" inputmode="numeric" placeholder="e.g. 75,000,000"></label>
+              <label><span>Original purchase cost</span><input class="money-input" id="cgtCostValue" type="text" inputmode="numeric" placeholder="e.g. 55,000,000"></label>
+              <label><span>Date of purchase</span><input id="cgtPurchaseDate" type="date"></label>
+              <label><span>Date of sale</span><input id="cgtSaleDate" type="date"></label>
+              <label><span>Property type</span><select id="cgtPropertyType"><option value="open">Open plot</option><option value="constructed">Constructed property</option><option value="flat">Flat</option></select></label>
+              <label><span>Improvement / transfer cost</span><input class="money-input" id="cgtImprovement" type="text" inputmode="numeric" placeholder="e.g. 1,500,000"></label>
+              <label><span>Seller tax status</span><select id="cgtStatus"><option value="active">Active ATL</option><option value="late">Late filer</option><option value="inactive">Not in ATL</option></select></label>
+            </div>
+            <div class="result-grid">
+              <div><span>Taxable gain</span><strong id="cgtGain">Rs. 0</strong></div>
+              <div><span>Holding period</span><strong id="cgtHoldingOut">-</strong></div>
+              <div><span>CGT rate</span><strong id="cgtRate">0%</strong></div>
+              <div><span>Capital gain tax</span><strong id="cgtTax">Rs. 0</strong></div>
+            </div>
+            <div class="explain-box" id="cgtExplain">Enter purchase date and sale date. The calculator will identify the applicable acquisition regime and holding period.</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="tab-panel" id="withholdingTab">
+        <section class="workspace one-column">
+          <form class="panel calculator-panel" id="whtForm">
+            <header class="panel-header">
+              <div>
+                <p class="eyebrow">Universal calculator</p>
+                <h2>Withholding Tax Calculator</h2>
+              </div>
+              <button class="icon-button" type="button" id="resetBtn" title="Reset inputs">Reset</button>
+            </header>
+
+            <div class="form-grid">
+              <label>
+                <span>Category</span>
+                <select id="category"></select>
+              </label>
+              <label>
+                <span>Transaction type</span>
+                <select id="transaction"></select>
+              </label>
+              <label>
+                <span>Amount / value</span>
+                <input class="money-input" id="amount" type="text" inputmode="numeric" placeholder="e.g. 1,250,000" autocomplete="off">
+              </label>
+              <label>
+                <span>Taxpayer status</span>
+                <select id="status">
+                  <option value="active">Active ATL filer</option>
+                  <option value="inactive">Inactive / not in ATL</option>
+                  <option value="late">Late filer where specified</option>
+                </select>
+              </label>
+              <label>
+                <span>Recipient type</span>
+                <select id="personType">
+                  <option value="individual">Individual / AOP</option>
+                  <option value="company">Company</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="result-strip">
+              <div><span>Applicable rate</span><strong id="rateOut">0%</strong></div>
+              <div><span>Tax amount</span><strong id="taxOut">Rs. 0</strong></div>
+              <div><span>Net after tax</span><strong id="netOut">Rs. 0</strong></div>
+            </div>
+
+            <div class="explain-box" id="explainBox"></div>
+          </form>
+
+        </section>
+      </section>
+
+      <section class="tab-panel" id="referenceTab">
+        <section class="panel slab-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Sections 155, 235, 231AB, 231B and 234</p>
+              <h2>Additional calculators</h2>
+            </div>
+          </header>
+          <div class="mini-grid">
+            <div class="mini-tool">
+              <h3>Rent of immovable property</h3>
+              <label><span>Annual rent</span><input class="money-input" id="rentAmount" type="text" inputmode="numeric" placeholder="e.g. 1,800,000"></label>
+              <label><span>Landlord type</span><select id="rentType"><option value="individual">Individual / AOP</option><option value="company">Company</option></select></label>
+              <strong id="rentTax">Rs. 0</strong>
+            </div>
+            <div class="mini-tool">
+              <h3>Electricity consumption</h3>
+              <label><span>Monthly bill</span><input class="money-input" id="electricAmount" type="text" inputmode="numeric" placeholder="e.g. 85,000"></label>
+              <label><span>Consumer type</span><select id="electricType"><option value="commercial">Commercial</option><option value="industrial">Industrial</option></select></label>
+              <strong id="electricTax">Rs. 0</strong>
+            </div>
+            <div class="mini-tool">
+              <h3>Cash withdrawal</h3>
+              <label><span>Daily withdrawal</span><input class="money-input" id="cashAmount" type="text" inputmode="numeric" placeholder="e.g. 250,000"></label>
+              <label><span>Status</span><select id="cashStatus"><option value="active">Active ATL</option><option value="inactive">Inactive / not in ATL</option></select></label>
+              <strong id="cashTax">Rs. 0</strong>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel slab-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Sections 231B and 234</p>
+              <h2>Motor vehicle calculator</h2>
+            </div>
+          </header>
+          <div class="form-grid three">
+            <label><span>Vehicle value / invoice value</span><input class="money-input" id="vehicleValue" type="text" inputmode="numeric" placeholder="e.g. 6,500,000"></label>
+            <label><span>Engine capacity</span><select id="vehicleCc"></select></label>
+            <label><span>Mode</span><select id="vehicleMode"><option value="registration">Registration / sale by manufacturer</option><option value="annual">Annual motor vehicle tax</option><option value="lump">Lump sum motor vehicle tax</option></select></label>
+          </div>
+          <div class="result-grid">
+            <div><span>Rate / fixed tax</span><strong id="vehicleRate">0%</strong></div>
+            <div><span>Estimated collection</span><strong id="vehicleTax">Rs. 0</strong></div>
+            <div><span>Nature</span><strong>Adjustable</strong></div>
+          </div>
+        </section>
+
+        <section class="panel reference-panel">
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">Searchable rate card</p>
+              <h2>Reference rates included</h2>
+            </div>
+            <input id="searchRates" type="search" placeholder="Search section, payment or rate">
+          </header>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>Payment / transaction</th>
+                  <th>Active rate</th>
+                  <th>Inactive / other rate</th>
+                  <th>Nature</th>
+                </tr>
+              </thead>
+              <tbody id="rateTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="notes prepared-by">
+        Prepared by Rai Ali
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
